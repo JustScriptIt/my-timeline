@@ -1,14 +1,12 @@
 import { createStore } from 'vuex'
+import appStore from './appStore'
+import modalsStore from './modalsStore'
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+const store = createStore({
+    modules: {
+        appStore,
+        modalsStore
+    }
 })
+
+export default store;

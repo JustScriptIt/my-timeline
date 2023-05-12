@@ -1,34 +1,51 @@
 import { Commit } from "vuex";
 
 export interface ModalState {
-    isShow: boolean;
+    createModalIsShow: boolean;
+    deleteModalIsShow: boolean;
 }
 
-const modal = {
+const modalsStore = {
     state: () => ({
-        isShow: false,
+        createModalIsShow: false,
+        deleteModalIsShow: false,
     }),
     mutations: {
-        openModal(state: ModalState) {
-            state.isShow = true;
+        showCreateModal(state: ModalState) {
+            state.createModalIsShow = true;
         },
-        closeModal(state: ModalState) {
-            state.isShow = false;
+        closeCreateModal(state: ModalState) {
+            state.createModalIsShow = false;
         },
+        showDeleteModal(state: ModalState) {
+            state.deleteModalIsShow = true;
+        },
+        closeDeleteModal(state: ModalState) {
+            state.deleteModalIsShow = false;
+        }
     },
     actions: {
-        openModal({ commit }: { commit: Commit }) {
-            commit("openModal");
+        showCreateModal({ commit }: { commit: Commit }) {
+            commit("showCreateModal");
         },
-        closeModal({ commit }: { commit: Commit }) {
-            commit("closeModal");
+        closeCreateModal({ commit }: { commit: Commit }) {
+            commit("closeCreateModal");
         },
+        showDeleteModal({ commit }: { commit: Commit }) {
+            commit("showDeleteModal");
+        },
+        closeDeleteModal({ commit }: { commit: Commit }) {
+            commit("closeDeleteModal");
+        }
     },
     getters: {
-        isShow(state: ModalState) {
-            return state.isShow;
+        createModalIsShow(state: ModalState) {
+            return state.createModalIsShow;
+        },
+        deleteModalIsShow(state: ModalState) {
+            return state.deleteModalIsShow;
         }
     }
 };
 
-export default modal;
+export default modalsStore;

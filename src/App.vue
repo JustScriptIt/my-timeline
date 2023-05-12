@@ -1,27 +1,51 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <Main/>
+    <Footer/>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import Main from "@/components/Main.vue";
+import Footer from "@/components/Footer.vue";
+import {defineComponent, ref} from "vue";
+import {useStore} from "vuex";
+import { MediaBlock } from "@/store/appStore";
 
-@Options({
-  components: {
-    HelloWorld,
-  },
+export default defineComponent({
+    components: {
+        Footer,
+        Main
+    },
+    setup() {
+        const store = useStore()
+        const mediaBlocks = ref([] as MediaBlock[])
+
+        store.dispatch("setMediaBlocks")
+            .then((data: MediaBlock[]) => {
+                mediaBlocks.value = data;
+            }).catch((error) => {
+                console.log(error);
+            });
+
+        return {
+            mediaBlocks
+        }
+    }
 })
-export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(90deg, rgba(220, 217, 214, 0.34) 0%, #CECFCE 100%);
+}
+
+.container {
+    margin: auto;
+    width: 85%;
 }
 </style>
